@@ -1,9 +1,11 @@
+import { useUserStore } from "@/store/userStore";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
 import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
 import { Platform } from "react-native";
 
 export default function TabLayout() {
+  const isAdmin = useUserStore((state) => state.isAdmin);
   if (Platform.OS === "ios") {
     return (
       <NativeTabs>
@@ -16,6 +18,13 @@ export default function TabLayout() {
           <Label>Search</Label>
           <Icon sf="magnifyingglass" />
         </NativeTabs.Trigger>
+
+        {isAdmin && (
+          <NativeTabs.Trigger name="create">
+            <Label>Add Property</Label>
+            <Icon sf="plus.circle.fill" />
+          </NativeTabs.Trigger>
+        )}
 
         <NativeTabs.Trigger name="saved">
           <Label>Saved</Label>
@@ -51,6 +60,18 @@ export default function TabLayout() {
           ),
         }}
       />
+
+      {isAdmin && (
+        <Tabs.Screen
+          name="create"
+          options={{
+            title: "Add Property",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="add-circle" size={size} color={color} />
+            ),
+          }}
+        />
+      )}
 
       <Tabs.Screen
         name="saved"

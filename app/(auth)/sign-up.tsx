@@ -2,14 +2,14 @@ import { useAuth, useSignUp } from "@clerk/expo";
 import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    Image,
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  Image,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 const SignUp = () => {
@@ -39,8 +39,13 @@ const SignUp = () => {
     });
 
     if (error) {
-      //   console.error(JSON.stringify(error.message, null, 2));
-      Alert.alert(error.message);
+      const userMessage =
+        errors.fields.password?.message ||
+        errors.fields.emailAddress?.message ||
+        "Unable to create an account. Please check your details and try again.";
+
+      console.error("Clerk signUp.password error:", error);
+      Alert.alert(userMessage);
       return;
     }
 

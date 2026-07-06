@@ -181,7 +181,7 @@ const SignIn = () => {
         </TouchableOpacity>
 
         <View className="flex-row justify-center">
-          <Text className="text-gray-500">Don'y have an account? </Text>
+          <Text className="text-gray-500">Don't have an account? </Text>
           <Link href="/sign-up">
             <Text className="text-blue-600 font-semibold">Sign Up</Text>
           </Link>
